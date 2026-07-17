@@ -43,7 +43,8 @@ SCTec-ChurnIA/
 ├── models/
 │   └── v1/                    # modelos treinados e métricas
 ├── img/
-│   └──logo_sctec.png          # logotipo sctec
+    ├──logo_sctec.png          # logotipo sctec readme
+│   └──logo_sctecr.png         # logotipo sctec relatório
 ├── outputs/
 │   └── figures/               # gráficos gerados
 └── src/
@@ -89,13 +90,27 @@ Após a execução, o projeto gera:
 - gráficos em [outputs/figures](outputs/figures)
 - modelos e métricas em [models/v1](models/v1)
 
+## 🛠️ Ferramentas utilizadas
+
+- Git / GitHub
+- Copilot
+- Gemini
+- aistudio.google.com
+- VSCode **v_1.129.0**
+- LibreOffice Calc **7.1.4.2 (x64)**
+- Windows 10 x64 **v_10.0.19045**
+
 ## 💡 Observações
 
 - O projeto usa um fluxo simples baseado em scripts Python e pode ser expandido para incluir novos modelos ou métricas.
 - Foram adotados modelos de ML leves o suficiente para rodar em hardwares legados e com pouca memória.
 - A estrutura de pastas é criada automaticamente ao executar os comandos de treino ou previsão.
 
+## 🎥 Demonstração
+
+https://drive.google.com/drive/.......
+
 ## 🧾 Conclusão
 
 O resultado deste projeto é um protótipo prático que une **contabilidade, inteligência artificial e visão de negócio**, permitindo que gestores avaliem com antecedência a erosão de margem e tomem decisões mais proativas para o negócio.
-Como tudo evolui, este projeto é a minha visão sobre esse assunto, e com certeza pode ser melhorado e aperfeiçoado.
+Assim como tudo evolui, este projeto representa a minha visão sobre o tema e, naturalmente, está aberto a melhorias e **aperfeiçoamentos futuros**.

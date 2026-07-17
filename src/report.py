@@ -1,4 +1,7 @@
 import locale
+import os
+import time
+import subprocess
 from datetime import datetime
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle
@@ -41,24 +44,24 @@ def generate(cenarios):
     #story.append(Spacer(1, 12))
 
     story.append(Paragraph("<b>Cenário Base (Normal)</b>", styles["Heading3"]))
-    story.append(Paragraph("Todos os meses de julho a dezembro permanecem em <b>BAIXO RISCO</b>.", styles["Normal"]))
-    story.append(Paragraph("Indica estabilidade e baixa probabilidade de churn nas condições atuais.", styles["Normal"]))
+    story.append(Paragraph("Todos os meses, menos Agosto e Setembro, permanecem em <b>BAIXO RISCO</b>.", styles["Normal"]))
+    story.append(Paragraph("Indica estabilidade e baixa probabilidade de churn prolongado nas condições atuais.", styles["Normal"]))
     #story.append(Spacer(1, 12))
 
     story.append(Paragraph("<b>Cenário 1 (10% aumento de receita e custos)</b>", styles["Heading3"]))
-    story.append(Paragraph("Comportamento idêntico ao cenário base.", styles["Normal"]))
-    story.append(Paragraph("Pequenos ajustes proporcionais não afetam significativamente o risco.", styles["Normal"]))
+    story.append(Paragraph("Comportamento onde todos os meses estão em <b>BAIXO RISCO</b>.", styles["Normal"]))
+    story.append(Paragraph("Pequenos ajustes proporcionais ajudam significativamente a eliminar o risco.", styles["Normal"]))
     #story.append(Spacer(1, 12))
 
     story.append(Paragraph("<b>Cenário 2 (20% aumento apenas de custos)</b>", styles["Heading3"]))
-    story.append(Paragraph("Agosto, Setembro e Outubro passam para <b>ALTO RISCO</b>.", styles["Normal"]))
-    story.append(Paragraph("Demonstra que aumento isolado de custos compromete a sustentabilidade.", styles["Normal"]))
+    story.append(Paragraph("Julho, Agosto, Setembro e Outubro passam para <b>ALTO RISCO</b>.", styles["Normal"]))
+    story.append(Paragraph("Demonstra que aumento isolado de custos compromete a sustentabilidade, epode levar a um churn prolongado.", styles["Normal"]))
     #story.append(Spacer(1, 12))
 
     story.append(Paragraph("<b>Cenário 3 (50% aumento de despesas)</b>", styles["Heading3"]))
-    story.append(Paragraph("Agosto, Setembro e Outubro mantêm classificação de <b>ALTO RISCO</b>.", styles["Normal"]))
+    story.append(Paragraph("Julho, Agosto, Setembro e Outubro mantêm classificação de <b>ALTO RISCO</b>.", styles["Normal"]))
     story.append(Paragraph("Novembro e Dezembro retornam para <b>BAIXO RISCO</b>, sugerindo recuperação parcial.", styles["Normal"]))
-    story.append(Paragraph("Evidencia vulnerabilidade significativa diante de pressões financeiras elevadas.", styles["Normal"]))
+    story.append(Paragraph("Evidencia vulnerabilidade significativa diante de pressões financeiras nestes meses, é bom ficar de olho.", styles["Normal"]))
     #story.append(Spacer(1, 20))
 
     story.append(Paragraph("Conclusão", styles["Heading2"]))    
@@ -66,6 +69,13 @@ def generate(cenarios):
     story.append(Paragraph("Meses críticos: <b>Agosto a Outubro</b>, que exigem atenção especial.", styles["Normal"]))
     story.append(Paragraph("Recomenda-se implementar <b>ações preventivas de retenção</b> e <b>controle de despesas</b> nesses períodos para mitigar riscos.", styles["Normal"]))
     pdf.build(story)
+
+    print("==================================================================")
+    print("Relatório de projeção gerado com sucesso!")
+    print("Favor verificar no local abaixo.")
+    print("outputs/ChurnIA-ProjecoesML.pdf")
+    print("==================================================================")
+
 
 def df_tabela(df, titulo):
     data = [df.columns.tolist()] + df.values.tolist()
@@ -80,3 +90,20 @@ def df_tabela(df, titulo):
         ('GRID',(0,0),(-1,-1),1,colors.black),
     ]))
     return [Paragraph(f"<b>{titulo}</b>", getSampleStyleSheet()["Heading3"]), Spacer(1,5), tabela, Spacer(1,10)]
+
+def open(nome_arquivo: str = "ChurnIA-ProjecoesML.pdf"):
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    caminho = os.path.join(base_dir, "outputs", nome_arquivo)
+
+    if os.path.exists(caminho):
+        try:
+            if os.name == 'nt':  # Windows
+                os.startfile(caminho)
+            elif os.name == 'posix':  # Linux/Mac
+                subprocess.run(["xdg-open", caminho])
+            else:
+                print("Sistema operacional não suportado.")
+        except Exception as e:
+            print(f"Erro ao abrir o PDF: {e}")
+    else:
+        print("Arquivo não encontrado:", caminho)

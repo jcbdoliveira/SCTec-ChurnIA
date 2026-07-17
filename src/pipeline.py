@@ -500,6 +500,7 @@ def prever():
     }
 
     relatorio.generate(cenarios)
+    relatorio.open()
     
     arquivo = 'models/v1/df_previsao_v1.pkl'
     modificacao = os.path.getmtime(arquivo)
