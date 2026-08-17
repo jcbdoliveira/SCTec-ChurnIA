@@ -43,7 +43,7 @@ SCTec-ChurnIA/
 ├── models/
 │   └── v1/                    # modelos treinados e métricas
 ├── img/
-    ├──logo_sctec.png          # logotipo sctec readme
+|   ├──logo_sctec.png          # logotipo sctec readme
 │   └──logo_sctecr.png         # logotipo sctec relatório
 ├── outputs/
 │   └── figures/               # gráficos gerados
@@ -105,10 +105,6 @@ Após a execução, o projeto gera:
 - O projeto usa um fluxo simples baseado em scripts Python e pode ser expandido para incluir novos modelos ou métricas.
 - Foram adotados modelos de ML leves o suficiente para rodar em hardwares legados e com pouca memória.
 - A estrutura de pastas é criada automaticamente ao executar os comandos de treino ou previsão.
-
-## 🎥 Demonstração
-
-https://drive.google.com/file/d/1_m-cwthCZCP7_cBSCc4f_EzmTcLzXFGG/view?usp=sharing
 
 ## 🧾 Conclusão
 
